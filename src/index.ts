@@ -1,25 +1,22 @@
-const inputString: string = (<HTMLInputElement>document.getElementById("inputString")).value;
-const numSpaces:number = parseInt((<HTMLInputElement>document.getElementById("numSpaces")).value);
-const button = (<HTMLButtonElement>document.getElementById("pad_it"));
+const button = document.getElementById("btn") as HTMLButtonElement;
+const input1 = document.getElementById("firstInput") as HTMLInputElement;
+const input2 = document.getElementById("secondInput") as HTMLInputElement;
 
-button!.addEventListener("click", function(){
-    console.log(prepend(inputString, numSpaces));
+button!.addEventListener("click", function () {
+    console.log(prepend([input1!.value, input2!.value]));
 });
 
-function prepend(inputString: string, numSpaces: number | string){
+function prepend<T>(array: T[]) {
+    let space: string = "";
+    let numOfSpaces = +array[1] as number;
+    let word = array[0]
 
-  if(numSpaces!= null && inputString!= null){
-  let spaces: string ="";
-    for(let x=0; x<numSpaces;x++){
-    spaces = spaces + "&nbsp;";
+    for (let i = 0; i < numOfSpaces; i++) {
+        space += " ";
     }
-     let result = spaces + inputString;
-     let output = "\"" + result + "\"";
-     return output;
 
-  }
-  else return "";
+    console.log("number of spaces:", numOfSpaces);
+    console.log("amount of space: ", "|" + space +"|");
 
+    return `${space}${word}`;
 }
-
-console.log(prepend("happy", 10));
